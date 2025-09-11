@@ -1,0 +1,371 @@
+{
+    "entities": [
+        {
+            "typeName": "User",
+            "guid": "-972081526",
+            "attributes": {
+                "name": "aremoto",
+                "role": "Kaggle Contributor",
+                "qualifiedName": "aremoto@Retailsalesforecast"
+            }
+        },
+        {
+            "typeName": "Project",
+            "guid": "-233726057",
+            "attributes": {
+                "name": "Retail sales forecast",
+                "keywords": [
+                    "data visualization",
+                    "finance",
+                    "business"
+                ],
+                "createdBy": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "startDate": 1757623408511,
+                "qualifiedName": "retail-sales-forecast@Retailsalesforecast"
+            },
+            "relationshipAttributes": {
+                "experiments": [
+                    {
+                        "guid": "-894546560",
+                        "typeName": "Experiment"
+                    }
+                ]
+            }
+        },
+        {
+            "typeName": "Workgroup",
+            "guid": "-237995146",
+            "attributes": {
+                "name": "Workgroup - Retail sales forecast",
+                "description": "Workgroup - Retail sales forecast",
+                "experiment": {
+                    "guid": "-894546560",
+                    "typeName": "Experiment"
+                },
+                "users": [
+                    {
+                        "guid": "-972081526",
+                        "typeName": "User"
+                    }
+                ],
+                "qualifiedName": "workgroup---retail-sales-forecast@Retailsalesforecast"
+            }
+        },
+        {
+            "typeName": "Experiment",
+            "guid": "-894546560",
+            "attributes": {
+                "name": "Retail sales forecast",
+                "project": {
+                    "guid": "-233726057",
+                    "typeName": "Project"
+                },
+                "qualifiedName": "retail-sales-forecast---experiment@Retailsalesforecast"
+            },
+            "relationshipAttributes": {
+                "stages": [
+                    {
+                        "guid": "-405322997",
+                        "typeName": "Stage"
+                    }
+                ],
+                "workgroup": [
+                    {
+                        "guid": "-237995146",
+                        "typeName": "Workgroup"
+                    }
+                ]
+            }
+        },
+        {
+            "typeName": "Stage",
+            "guid": "-405322997",
+            "attributes": {
+                "name": "Stage",
+                "experiment": {
+                    "guid": "-894546560",
+                    "typeName": "Experiment"
+                },
+                "status": "Completed",
+                "qualifiedName": "stage@Retailsalesforecast"
+            },
+            "relationshipAttributes": {
+                "iterations": [
+                    {
+                        "guid": "-942791720",
+                        "typeName": "Iteration"
+                    }
+                ]
+            }
+        },
+        {
+            "typeName": "Iteration",
+            "guid": "-942791720",
+            "attributes": {
+                "name": "Iteration 1",
+                "stage": {
+                    "guid": "-405322997",
+                    "typeName": "Stage"
+                },
+                "qualifiedName": "iteration-1@Retailsalesforecast"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-205035185",
+            "attributes": {
+                "name": "Dataset 1: sales data-set.csv (Quality Verified - Original CSV)",
+                "producer": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "document": "sales data-set.csv",
+                "format": "csv",
+                "size": 13264115,
+                "qualifiedName": "dataset-0-sales-data-set.csv@Retailsalesforecast",
+                "dataProcessingStatus": "CSV 'sales data-set.csv' met quality standards, original version used",
+                "qualityScore": 90.0,
+                "qualityStatus": "Verified",
+                "meetsQualityThreshold": true,
+                "csvCleaningApplied": false,
+                "cleaningDetails": "Original CSV 'sales data-set.csv' quality score was acceptable. No cleaning required."
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-719085279",
+            "attributes": {
+                "name": "Dataset 2: Features data set.csv (Quality Enhanced - CSV Cleaned)",
+                "producer": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "document": "Features data set.csv",
+                "format": "csv",
+                "size": 762222,
+                "qualifiedName": "dataset-1-features-data-set.csv@Retailsalesforecast",
+                "dataProcessingStatus": "CSV 'Features data set.csv' was cleaned and quality enhanced",
+                "qualityScore": 91.0,
+                "qualityStatus": "Enhanced",
+                "meetsQualityThreshold": true,
+                "csvCleaningApplied": true,
+                "cleaningDetails": "Original CSV 'Features data set.csv' was processed and cleaned due to quality score below threshold. Enhanced version is being used for analysis."
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-696556907",
+            "attributes": {
+                "name": "Dataset 3: stores data-set.csv (Quality Verified - Original CSV)",
+                "producer": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "document": "stores data-set.csv",
+                "format": "csv",
+                "size": 577,
+                "qualifiedName": "dataset-2-stores-data-set.csv@Retailsalesforecast",
+                "dataProcessingStatus": "CSV 'stores data-set.csv' met quality standards, original version used",
+                "qualityScore": 100.0,
+                "qualityStatus": "Verified",
+                "meetsQualityThreshold": true,
+                "csvCleaningApplied": false,
+                "cleaningDetails": "Original CSV 'stores data-set.csv' quality score was acceptable. No cleaning required."
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-37903224",
+            "attributes": {
+                "name": "Notebook: retail-sales-forecast.ipynb",
+                "producer": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "document": "retail-sales-forecast.ipynb",
+                "format": "ipynb",
+                "size": 85000,
+                "qualifiedName": "notebook-retail-sales-forecast.ipynb@Retailsalesforecast"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-335657649",
+            "attributes": {
+                "name": "Log: retail-sales-forecast.log",
+                "producer": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "document": "retail-sales-forecast.log",
+                "format": "log",
+                "size": 1137,
+                "qualifiedName": "log-retail-sales-forecast.log@Retailsalesforecast"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-482681102",
+            "attributes": {
+                "name": "Chart: Figure 1 - no model - Gain some graphical insight",
+                "producer": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "document": "no_model_-_Gain_some_graphical_insight.png",
+                "format": "png",
+                "size": 45000,
+                "qualifiedName": "chart-0-no-model---gain-some-graphical-insight.png@Retailsalesforecast"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-698438059",
+            "attributes": {
+                "name": "Chart: Figure 2 - no model - Forecast of the total sales volume",
+                "producer": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "document": "no_model_-_Forecast_of_the_total_sales_volume.png",
+                "format": "png",
+                "size": 45000,
+                "qualifiedName": "chart-1-no-model---forecast-of-the-total-sales-vol@Retailsalesforecast"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-771284807",
+            "attributes": {
+                "name": "Chart: Figure 3 - no model - Model definition",
+                "producer": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "document": "no_model_-_Model_definition.png",
+                "format": "png",
+                "size": 45000,
+                "qualifiedName": "chart-2-no-model---model-definition.png@Retailsalesforecast"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-401016033",
+            "attributes": {
+                "name": "Chart: Figure 4 - no model - Forecast of the store-wise sales volume",
+                "producer": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "document": "no_model_-_Forecast_of_the_store-wise_sales_volume.png",
+                "format": "png",
+                "size": 45000,
+                "qualifiedName": "chart-3-no-model---forecast-of-the-store-wise-sale@Retailsalesforecast"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-541170206",
+            "attributes": {
+                "name": "Chart: Figure 5 - no model - Look for predictive power from external variables",
+                "producer": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "document": "no_model_-_Look_for_predictive_power_from_external_variables.png",
+                "format": "png",
+                "size": 45000,
+                "qualifiedName": "chart-4-no-model---look-for-predictive-power-from-@Retailsalesforecast"
+            }
+        },
+        {
+            "typeName": "Action",
+            "guid": "-284395411",
+            "attributes": {
+                "name": "Action - Notebook - Retail sales forecast",
+                "status": "Completed",
+                "inputData": "Analysis of 3 datasets: sales data-set.csv, Features data set.csv, stores data-set.csv. CSVs cleaned and enhanced: Features data set.csv",
+                "outputData": "Generated 7 outputs including models and visualizations",
+                "iteration": {
+                    "guid": "-942791720",
+                    "typeName": "Iteration"
+                },
+                "madeBy": [
+                    {
+                        "guid": "-972081526",
+                        "typeName": "User"
+                    }
+                ],
+                "qualifiedName": "notebook-retail-sales-forecast.ipynb-v1@Retailsalesforecast"
+            },
+            "relationshipAttributes": {
+                "inputs": [
+                    {
+                        "guid": "-205035185",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-719085279",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-696556907",
+                        "typeName": "UsedData"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "guid": "-37903224",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-335657649",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-482681102",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-698438059",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-771284807",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-401016033",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-541170206",
+                        "typeName": "UsedData"
+                    }
+                ]
+            }
+        },
+        {
+            "typeName": "Consensus",
+            "guid": "-830285256",
+            "attributes": {
+                "name": "Validation - Retail sales forecast",
+                "typeConsensus": "Individual Review",
+                "agreementLevel": 100,
+                "resolvedBy": {
+                    "guid": "-972081526",
+                    "typeName": "User"
+                },
+                "result": "approved",
+                "action": {
+                    "guid": "-284395411",
+                    "typeName": "Action"
+                },
+                "qualifiedName": "validation-retail-sales-forecast@Retailsalesforecast"
+            }
+        }
+    ]
+}

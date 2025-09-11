@@ -1,0 +1,488 @@
+{
+    "entities": [
+        {
+            "typeName": "User",
+            "guid": "-171984882",
+            "attributes": {
+                "name": "joelknapp",
+                "role": "Kaggle Contributor",
+                "qualifiedName": "joelknapp@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "Project",
+            "guid": "-167902336",
+            "attributes": {
+                "name": "Student Performance Analysis",
+                "keywords": [],
+                "createdBy": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "startDate": 1757607382488,
+                "qualifiedName": "student-performance-analysis@StudentPerformanceAn"
+            },
+            "relationshipAttributes": {
+                "experiments": [
+                    {
+                        "guid": "-157129734",
+                        "typeName": "Experiment"
+                    }
+                ]
+            }
+        },
+        {
+            "typeName": "Workgroup",
+            "guid": "-860714987",
+            "attributes": {
+                "name": "Workgroup - Student Performance Analysis",
+                "description": "Workgroup - Student Performance Analysis",
+                "experiment": {
+                    "guid": "-157129734",
+                    "typeName": "Experiment"
+                },
+                "users": [
+                    {
+                        "guid": "-171984882",
+                        "typeName": "User"
+                    }
+                ],
+                "qualifiedName": "workgroup---student-performance-analysis@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "Experiment",
+            "guid": "-157129734",
+            "attributes": {
+                "name": "Student Performance Analysis",
+                "project": {
+                    "guid": "-167902336",
+                    "typeName": "Project"
+                },
+                "qualifiedName": "student-performance-analysis---experiment@StudentPerformanceAn"
+            },
+            "relationshipAttributes": {
+                "stages": [
+                    {
+                        "guid": "-296428862",
+                        "typeName": "Stage"
+                    }
+                ],
+                "workgroup": [
+                    {
+                        "guid": "-860714987",
+                        "typeName": "Workgroup"
+                    }
+                ]
+            }
+        },
+        {
+            "typeName": "Stage",
+            "guid": "-296428862",
+            "attributes": {
+                "name": "Stage",
+                "experiment": {
+                    "guid": "-157129734",
+                    "typeName": "Experiment"
+                },
+                "status": "Completed",
+                "qualifiedName": "stage@StudentPerformanceAn"
+            },
+            "relationshipAttributes": {
+                "iterations": [
+                    {
+                        "guid": "-129763024",
+                        "typeName": "Iteration"
+                    }
+                ]
+            }
+        },
+        {
+            "typeName": "Iteration",
+            "guid": "-129763024",
+            "attributes": {
+                "name": "Iteration 1",
+                "stage": {
+                    "guid": "-296428862",
+                    "typeName": "Stage"
+                },
+                "qualifiedName": "iteration-1@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-68745650",
+            "attributes": {
+                "name": "Dataset 1: Student_performance_data _.csv (Quality Verified - Original CSV)",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "Student_performance_data _.csv",
+                "format": "csv",
+                "size": 166901,
+                "qualifiedName": "dataset-0-student-performance-data--.csv@StudentPerformanceAn",
+                "dataProcessingStatus": "CSV 'Student_performance_data _.csv' met quality standards, original version used",
+                "qualityScore": 100.0,
+                "qualityStatus": "Verified",
+                "meetsQualityThreshold": true,
+                "csvCleaningApplied": false,
+                "cleaningDetails": "Original CSV 'Student_performance_data _.csv' quality score was acceptable. No cleaning required."
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-550053879",
+            "attributes": {
+                "name": "Notebook: student-performance-analysis.ipynb",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "student-performance-analysis.ipynb",
+                "format": "ipynb",
+                "size": 85000,
+                "qualifiedName": "notebook-student-performance-analysis.ipynb@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-206347975",
+            "attributes": {
+                "name": "Log: student-performance-analysis.log",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "student-performance-analysis.log",
+                "format": "log",
+                "size": 1573,
+                "qualifiedName": "log-student-performance-analysis.log@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-912216645",
+            "attributes": {
+                "name": "Chart: Figure 1 - KNeighborsClassifier - Correlation Among Features",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "KNeighborsClassifier_-_Correlation_Among_Features.png",
+                "format": "png",
+                "size": 45000,
+                "qualifiedName": "chart-0-kneighborsclassifier---correlation-among-f@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-860856306",
+            "attributes": {
+                "name": "Chart: Figure 2 - KNeighborsClassifier - Selecting a Classification Model",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "KNeighborsClassifier_-_Selecting_a_Classification_Model.png",
+                "format": "png",
+                "size": 45000,
+                "qualifiedName": "chart-1-kneighborsclassifier---selecting-a-classif@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-630399030",
+            "attributes": {
+                "name": "Chart: Figure 3 - KNeighborsClassifier - Model Evaluation",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "KNeighborsClassifier_-_Model_Evaluation.png",
+                "format": "png",
+                "size": 45000,
+                "qualifiedName": "chart-2-kneighborsclassifier---model-evaluation.pn@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-820286395",
+            "attributes": {
+                "name": "Chart: Figure 4 - SVC - Model Evaluation (again)",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "SVC_-_Model_Evaluation_(again).png",
+                "format": "png",
+                "size": 45000,
+                "qualifiedName": "chart-3-svc---model-evaluation-(again).png@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-295925672",
+            "attributes": {
+                "name": "Chart: Figure 5 - GradientBoostingClassifier - Reducing Dimensionality",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "GradientBoostingClassifier_-_Reducing_Dimensionality.png",
+                "format": "png",
+                "size": 45000,
+                "qualifiedName": "chart-4-gradientboostingclassifier---reducing-dime@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-810229496",
+            "attributes": {
+                "name": "Model: SVC",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "SVC.pickle",
+                "format": "pickle",
+                "size": 1000000,
+                "qualifiedName": "model-svc@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-882676854",
+            "attributes": {
+                "name": "Model: RandomForestClassifier",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "RandomForestClassifier.pickle",
+                "format": "pickle",
+                "size": 1000000,
+                "qualifiedName": "model-randomforestclassifier@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-771012232",
+            "attributes": {
+                "name": "Model: AdaBoostClassifier",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "AdaBoostClassifier.pickle",
+                "format": "pickle",
+                "size": 1000000,
+                "qualifiedName": "model-adaboostclassifier@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-463840254",
+            "attributes": {
+                "name": "Model: KNeighborsClassifier",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "KNeighborsClassifier.pickle",
+                "format": "pickle",
+                "size": 1000000,
+                "qualifiedName": "model-kneighborsclassifier@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-476248974",
+            "attributes": {
+                "name": "Model: CatBoostClassifier",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "CatBoostClassifier.pickle",
+                "format": "pickle",
+                "size": 1000000,
+                "qualifiedName": "model-catboostclassifier@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-137300171",
+            "attributes": {
+                "name": "Model: XGBClassifier",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "XGBClassifier.pickle",
+                "format": "pickle",
+                "size": 1000000,
+                "qualifiedName": "model-xgbclassifier@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-827256513",
+            "attributes": {
+                "name": "Model: GradientBoostingClassifier",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "GradientBoostingClassifier.pickle",
+                "format": "pickle",
+                "size": 1000000,
+                "qualifiedName": "model-gradientboostingclassifier@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-775128401",
+            "attributes": {
+                "name": "Model: LGBMClassifier",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "LGBMClassifier.pickle",
+                "format": "pickle",
+                "size": 1000000,
+                "qualifiedName": "model-lgbmclassifier@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "UsedData",
+            "guid": "-933905795",
+            "attributes": {
+                "name": "Model: DecisionTreeClassifier",
+                "producer": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "document": "DecisionTreeClassifier.pickle",
+                "format": "pickle",
+                "size": 1000000,
+                "qualifiedName": "model-decisiontreeclassifier@StudentPerformanceAn"
+            }
+        },
+        {
+            "typeName": "Action",
+            "guid": "-391910465",
+            "attributes": {
+                "name": "Action - Notebook - Student Performance Analysis",
+                "status": "Completed",
+                "inputData": "Analysis of 1 datasets: Student_performance_data _.csv",
+                "outputData": "Generated 16 outputs including models and visualizations",
+                "iteration": {
+                    "guid": "-129763024",
+                    "typeName": "Iteration"
+                },
+                "madeBy": [
+                    {
+                        "guid": "-171984882",
+                        "typeName": "User"
+                    }
+                ],
+                "qualifiedName": "notebook-student-performance-analysis.ipynb-v1@StudentPerformanceAn"
+            },
+            "relationshipAttributes": {
+                "inputs": [
+                    {
+                        "guid": "-68745650",
+                        "typeName": "UsedData"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "guid": "-550053879",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-206347975",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-912216645",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-860856306",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-630399030",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-820286395",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-295925672",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-810229496",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-882676854",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-771012232",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-463840254",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-476248974",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-137300171",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-827256513",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-775128401",
+                        "typeName": "UsedData"
+                    },
+                    {
+                        "guid": "-933905795",
+                        "typeName": "UsedData"
+                    }
+                ]
+            }
+        },
+        {
+            "typeName": "Consensus",
+            "guid": "-320390002",
+            "attributes": {
+                "name": "Validation - Student Performance Analysis",
+                "typeConsensus": "Individual Review",
+                "agreementLevel": 100,
+                "resolvedBy": {
+                    "guid": "-171984882",
+                    "typeName": "User"
+                },
+                "result": "approved",
+                "action": {
+                    "guid": "-391910465",
+                    "typeName": "Action"
+                },
+                "qualifiedName": "validation-student-performance-analysis@StudentPerformanceAn"
+            }
+        }
+    ]
+}
