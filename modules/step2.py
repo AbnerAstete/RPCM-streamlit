@@ -11,7 +11,7 @@ def show(proyecto):
     understanding of the project. The metadata will be transformed into our standardized JSON format.
     """)
     
-    st.image("assets/step2.svg", caption="Metadata Extraction Step")
+    st.image("assets/Step2.svg", caption="Metadata Extraction Step")
     
     st.markdown("---")
     
