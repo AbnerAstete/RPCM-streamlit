@@ -28,7 +28,7 @@ def show_atlas_interface():
     st.markdown("Explore the full Atlas interface with all imported entities:")
     
     # URL del proxy
-    proxy_url = "https://refactored-space-winner-xq6g54v6pvr2pr9-8502.app.github.dev/"
+    proxy_url = "http://localhost:8502"
 
     # Crear el iframe usando el proxy
     components.iframe(
