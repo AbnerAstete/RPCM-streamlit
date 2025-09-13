@@ -17,26 +17,27 @@ def show(proyecto):
     tab1, tab2 = st.tabs(["🌐 Atlas Interface", "🔍 Interactive Query Builder"])
     
     with tab1:
-        show_atlas_interface()
+        st.markdown("Work in progress...")
+        # show_atlas_interface()
     
     with tab2:
         show_interactive_query_builder(proyecto)
 
-def show_atlas_interface():
-    """Muestra la interfaz de Atlas embebida"""
-    st.subheader("Atlas Web Interface")
-    st.markdown("Explore the full Atlas interface with all imported entities:")
+# def show_atlas_interface():
+#     """Muestra la interfaz de Atlas embebida"""
+#     st.subheader("Atlas Web Interface")
+#     st.markdown("Explore the full Atlas interface with all imported entities:")
     
-    # URL del proxy
-    proxy_url = "http://localhost:8502"
+#     # URL del proxy
+#     proxy_url = "http://localhost:8502"
 
-    # Crear el iframe usando el proxy
-    components.iframe(
-        src=proxy_url,
-        width=1400,
-        height=800,
-        scrolling=True
-    )
+#     # Crear el iframe usando el proxy
+#     components.iframe(
+#         src=proxy_url,
+#         width=1400,
+#         height=800,
+#         scrolling=True
+#     )
 
 def show_interactive_query_builder(proyecto):
     """Constructor interactivo con opciones calculadas"""
