@@ -18,26 +18,26 @@ def show(proyecto):
     
     with tab1:
         st.markdown("Work in progress...")
-        # show_atlas_interface()
+        show_atlas_interface()
     
     with tab2:
         show_interactive_query_builder(proyecto)
 
-# def show_atlas_interface():
-#     """Muestra la interfaz de Atlas embebida"""
-#     st.subheader("Atlas Web Interface")
-#     st.markdown("Explore the full Atlas interface with all imported entities:")
+def show_atlas_interface():
+    """Muestra la interfaz de Atlas embebida"""
+    st.subheader("Atlas Web Interface")
+    st.markdown("Explore the full Atlas interface with all imported entities:")
     
-#     # URL del proxy
-#     proxy_url = "http://localhost:8502"
+    # URL del proxy
+    proxy_url = "https://didactic-acorn-v74j65q4pqv3xx7p-8502.app.github.dev/"
 
-#     # Crear el iframe usando el proxy
-#     components.iframe(
-#         src=proxy_url,
-#         width=1400,
-#         height=800,
-#         scrolling=True
-#     )
+    # Crear el iframe usando el proxy
+    components.iframe(
+        src=proxy_url,
+        width=1400,
+        height=800,
+        scrolling=True
+    )
 
 def show_interactive_query_builder(proyecto):
     """Constructor interactivo con opciones calculadas"""
