@@ -1,8 +1,9 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import os
 import requests
-import json
-import time
+from requests.auth import HTTPBasicAuth
+
 
 
 def show(proyecto):
@@ -14,34 +15,56 @@ def show(proyecto):
     Once the RPCM entities and instances have been ingested into Apache Atlas, you can explore them through queries.
     """)
 
-    # Crear tabs principales
-    tab1, tab2 = st.tabs(["🌐 Atlas Interface", "🔍 Interactive Query Builder"])
+    tab1, tab2 = st.tabs(["🔍 Interactive Query Builder", "🌐 Atlas Interface"])
     
     with tab1:
-        show_atlas_interface()
+        show_interactive_query_builder(proyecto)
     
     with tab2:
-        show_interactive_query_builder(proyecto)
+        show_atlas_interface()
+        
 
 def show_atlas_interface():
-    """Muestra la interfaz de Atlas embebida"""
     st.subheader("Atlas Web Interface")
     st.markdown("Explore the full Atlas interface with all imported entities:")
-    st.markdown("""
-        Access credentials:
-        - **Username:** `admin`  
-        - **Password:** `admin`  
-    """)
+
+    # Detect host environment
+    host_ip = os.getenv('HOST_IP', 'localhost')
     
-    # Add authentication warning
-    st.warning("⚠️ If you see login issues, try opening Atlas in a new tab using the link below.")
+    # Determine proxy URL
+    if host_ip.startswith(('http://', 'https://')):
+        # HOST_IP is a complete URL (Codespaces case)
+        proxy_url = host_ip
+        env_message = "Detected Codespace environment: using Option 3 (CODESPACE_NAME) automatically."
+    else:
+        # HOST_IP is an IP (local case)
+        proxy_url = f"http://{host_ip}:8502"
+        env_message = ("Running locally: using Option 2 (Machine IP address) by default, "
+                       "which is similar to localhost but accessible from other devices on the same network.")
+
+    print(f"Using proxy URL: {proxy_url}")
+
+    # Show environment info
+    st.info(
+        f"Depending on where you are running Atlas, there are three main ways to access the web interface:\n\n"
+        f"1. **localhost** – accessible only from this machine.\n"
+        f"2. **Machine IP address** – accessible from other devices on the same network.\n"
+        f"3. **CODESPACE_NAME** – accessible via the public URL provided by GitHub Codespaces.\n\n"
+        f"{env_message}"
+    )
     
-    proxy_url = "http://localhost:8502"
-    
-    # Provide direct link option
-    st.markdown(f"**Direct Link:** [Open Atlas in New Tab]({proxy_url})")
-    
-    # Try embedding with additional parameters
+    # Show login and link
+    st.markdown(
+        f"""
+        **Username:** `admin`  
+        **Password:** `admin`
+
+        <a href="{proxy_url}" target="_blank">🔗 Open Atlas in a new window</a>  
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Embed Atlas in iframe
     components.iframe(
         src=proxy_url,
         width=1400,
@@ -49,15 +72,15 @@ def show_atlas_interface():
         scrolling=True
     )
 
+
 def show_interactive_query_builder(proyecto):
-    """Constructor interactivo con opciones calculadas"""
     st.subheader("Interactive DSL Query Builder")
     st.markdown("Build queries by selecting from available options in your data:")
     
-    # Obtener las opciones disponibles para este proyecto
+    # Get the options available for this project
     query_options = get_query_options(proyecto)
     
-    # Selector de tipo de consulta
+    # Query type selector
     query_category = st.selectbox(
         "What do you want to explore?",
         list(query_options.keys())
@@ -67,7 +90,6 @@ def show_interactive_query_builder(proyecto):
         build_interactive_query(query_category, query_options[query_category], proyecto)
 
 def get_query_options(proyecto):
-    """Retorna opciones de consulta específicas para cada proyecto"""
     
     if proyecto == "retail" or "retail" in proyecto.lower():
         return {
@@ -75,13 +97,24 @@ def get_query_options(proyecto):
                 "entity": "Project",
                 "description": "Explore project metadata and details",
                 "filters": {
-                    "None": {"query_part": "", "description": "Show all project info"},
-                },
-                "fields": {
-                    "Basic Info": ["name", "createdBy"],
-                    "Keywords": ["name", "keywords"], 
-                    "Timeline": ["name", "startDate", "endDate"],
-                    "Complete": ["name", "keywords", "createdBy", "startDate", "endDate"]
+                    "Project": {
+                        "query_part": "", 
+                        "description": "Show all project info", 
+                        "entity": "Project",
+                        "fields": {
+                            "Basic Info": ["name", "createdBy"],
+                            "Keywords": ["name", "keywords"], 
+                            "Timeline": ["name", "startDate", "endDate"]
+                        }
+                    },
+                    "Consensus": {
+                        "query_part": "", 
+                        "description": "Show consensus validation data", 
+                        "entity": "Consensus",
+                        "fields": {
+                            "Complete": ["agreementLevel", "qualifiedName", "result", "typeConsensus"]
+                        }
+                    }
                 },
                 "known_values": {
                     "name": "Retail sales forecast",
@@ -93,8 +126,8 @@ def get_query_options(proyecto):
                 "entity": "UsedData",
                 "description": "Explore input data files and their properties",
                 "filters": {
-                    "CSV Files Only": {"query_part": "where format = \"csv\"", "description": "Show only CSV datasets"},
-                    "Large Files (>1MB)": {"query_part": "where size > 1000000", "description": "Show files larger than 1MB"},
+                    "CSV Files Only": {"query_part": "WHERE format = \"csv\"", "description": "Show only CSV datasets"},
+                    "Large Files (>1MB)": {"query_part": "WHERE size > 1000000", "description": "Show files larger than 1MB"},
                     "All Data Files": {"query_part": "", "description": "Show all data files"}
                 },
                 "fields": {
@@ -114,8 +147,8 @@ def get_query_options(proyecto):
                 "entity": "UsedData",
                 "description": "Explore charts, notebooks and other outputs",
                 "filters": {
-                    "Visualizations": {"query_part": "where format = \"png\"", "description": "Show generated charts and plots"},
-                    "Notebooks": {"query_part": "where format = \"ipynb\"", "description": "Show Jupyter notebooks"},
+                    "Visualizations": {"query_part": "WHERE format = \"png\"", "description": "Show generated charts and plots"},
+                    "Notebooks": {"query_part": "WHERE format = \"ipynb\"", "description": "Show Jupyter notebooks"},
                     "All Outputs": {"query_part": "", "description": "Show all generated files"}
                 },
                 "fields": {
@@ -137,8 +170,8 @@ def get_query_options(proyecto):
                 "entity": "Action",
                 "description": "Explore notebook execution and data processing",
                 "filters": {
-                    "Completed Actions": {"query_part": "where status = \"Completed\"", "description": "Show completed processes"},
-                    "Main Notebook": {"query_part": "where name = \"Action - Notebook - Retail sales forecast\"", "description": "Show main analysis action"},
+                    "Completed Actions": {"query_part": "WHERE status = \"Completed\"", "description": "Show completed processes"},
+                    "Main Notebook": {"query_part": "WHERE name = \"Action - Notebook - Retail sales forecast\"", "description": "Show main analysis action"},
                     "All Actions": {"query_part": "", "description": "Show all actions"}
                 },
                 "fields": {
@@ -159,7 +192,7 @@ def get_query_options(proyecto):
                 "entity": "Consensus",
                 "description": "Check validation and approval status",
                 "filters": {
-                    "Approved Only": {"query_part": "where result = \"approved\"", "description": "Show approved validations"},
+                    "Approved Only": {"query_part": "WHERE result = \"approved\"", "description": "Show approved validations"},
                     "All Validations": {"query_part": "", "description": "Show all validation results"}
                 },
                 "fields": {
@@ -183,11 +216,23 @@ def get_query_options(proyecto):
                 "entity": "Project",
                 "description": "Explore project metadata and details",
                 "filters": {
-                    "None": {"query_part": "", "description": "Show all project info"},
-                },
-                "fields": {
-                    "Basic Info": ["createdBy"],
-                    "Project Info": ["qualifiedName", "startDate"]
+                    "Project": {
+                        "query_part": "", 
+                        "description": "Show all project info", 
+                        "entity": "Project",
+                        "fields": {
+                            "Basic Info": ["createdBy"],
+                            "Project Info": ["qualifiedName", "startDate"]
+                        }
+                    },
+                    "Consensus": {
+                        "query_part": "", 
+                        "description": "Show consensus validation data", 
+                        "entity": "Consensus",
+                        "fields": {
+                            "Complete": ["agreementLevel", "qualifiedName", "result", "typeConsensus"]
+                        }
+                    }
                 },
                 "known_values": {
                     "name": "Student Performance Analysis",
@@ -198,7 +243,7 @@ def get_query_options(proyecto):
                 "entity": "UsedData", 
                 "description": "Explore the student performance dataset",
                 "filters": {
-                    "CSV Data": {"query_part": "where format = \"csv\"", "description": "Show the main dataset"},
+                    "CSV Data": {"query_part": "WHERE format = \"csv\"", "description": "Show the main dataset"},
                 },
                 "fields": {
                     "File Info": ["name", "format", "size"],
@@ -215,8 +260,8 @@ def get_query_options(proyecto):
                 "entity": "UsedData",
                 "description": "Explore generated ML models", 
                 "filters": {
-                    "Models Only": {"query_part": "where format = \"pickle\"", "description": "Show ML model files"},
-                    "All Models": {"query_part": "where name contains \"Model\"", "description": "Show all model entities"}
+                    "Models Only": {"query_part": "WHERE format = \"pickle\"", "description": "Show ML model files"},
+                    "All Models": {"query_part": "WHERE name contains \"Model\"", "description": "Show all model entities"}
                 },
                 "fields": {
                     "Model Names": ["name"],
@@ -234,7 +279,7 @@ def get_query_options(proyecto):
                 "entity": "UsedData",
                 "description": "Explore visualization outputs",
                 "filters": {
-                    "Charts Only": {"query_part": "where format = \"png\"", "description": "Show generated charts"},
+                    "Charts Only": {"query_part": "WHERE format = \"png\"", "description": "Show generated charts"},
                 },
                 "fields": {
                     "Chart Names": ["name"],
@@ -254,7 +299,7 @@ def get_query_options(proyecto):
                 "entity": "Action",
                 "description": "Explore notebook execution details",
                 "filters": {
-                    "Main Analysis": {"query_part": "where name = \"Action - Notebook - Student Performance Analysis\"", "description": "Show main analysis action"},
+                    "Main Analysis": {"query_part": "WHERE name = \"Action - Notebook - Student Performance Analysis\"", "description": "Show main analysis action"},
                 },
                 "fields": {
                     "Execution": ["qualifiedName", "status"],
@@ -273,14 +318,14 @@ def get_query_options(proyecto):
         }
 
 def build_interactive_query(category, options, proyecto):
-    """Construye la consulta de forma interactiva"""
+    """Build the query interactively"""
     
     st.write(f"**{options['description']}**")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        # Selector de filtro
+        # Filter selector
         filter_option = st.selectbox(
             "Filter by:",
             list(options['filters'].keys()),
@@ -291,25 +336,77 @@ def build_interactive_query(category, options, proyecto):
         st.caption(filter_info['description'])
     
     with col2:
-        # Selector de campos
+        # Field selector - use fields from the selected filter
+        available_fields = filter_info.get('fields', options.get('fields', {}))
         field_option = st.selectbox(
             "Show fields:",
-            list(options['fields'].keys()),
+            list(available_fields.keys()),
             help="Choose which fields to display"
         )
         
-        selected_fields = options['fields'][field_option]
+        selected_fields = available_fields[field_option]
     
-    # Construir la query
-    entity = options['entity']
-    filter_part = options['filters'][filter_option]['query_part']
+    # Build the query - use entity from filter if available, otherwise use default entity
+    if 'entity' in filter_info:
+        entity = filter_info['entity']
+    else:
+        entity = options['entity']
+        
+    filter_part = filter_info['query_part']
     fields_part = ", ".join(selected_fields)
     
+    # To display the queries vertically
     if filter_part:
-        query = f"from {entity} {filter_part} select {fields_part}"
+        query_display = f"SELECT {fields_part}\nFROM {entity}\n{filter_part}"
     else:
-        query = f"from {entity} select {fields_part}"
+        query_display = f"SELECT {fields_part}\nFROM {entity}"
     
-    # Mostrar query generada
-    st.subheader("Generated DSL Query")
-    st.code(query, language="sql")
+    st.subheader("DSL Query (visual)")
+    st.code(query_display, language="sql")
+    
+    # To send to the API
+    if filter_part:
+        query_api = f"FROM {entity} {filter_part} SELECT {fields_part}"
+    else:
+        query_api = f"FROM {entity} SELECT {fields_part}"
+    
+    if st.button("Run Query"):
+        results = execute_atlas_query(query_api)
+        
+        st.subheader("Query Results")
+        
+        if "error" in results:
+            st.error(results["error"])
+            if "details" in results:
+                st.text(results["details"])
+        else:
+            # Show response in JSON 
+            if "entities" in results:
+                st.json(results["entities"])
+            else:
+                st.json(results)
+
+
+
+    
+def execute_atlas_query(query):
+    """Execute the DSL query against the Apache Atlas API"""
+    
+    # Atlas URL 
+    host_ip = os.getenv('HOST_IP', 'localhost')
+    atlas_url = f"http://{host_ip}:21000/api/atlas/v2/search/dsl"
+    
+    try:
+        response = requests.get(
+            atlas_url,
+            params={"query": query},
+            auth=HTTPBasicAuth("admin", "admin")  # default credentials
+        )
+        
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return {"error": f"Atlas API returned {response.status_code}", "details": response.text}
+    
+    except Exception as e:
+        return {"error": str(e)}
