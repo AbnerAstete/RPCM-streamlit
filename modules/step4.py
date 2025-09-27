@@ -4,6 +4,7 @@ import requests
 import json
 import time
 
+
 def show(proyecto):
     """Step 4: Taxonomy Queries"""
     st.header("📈 Step 4: Taxonomy Queries")
@@ -17,7 +18,6 @@ def show(proyecto):
     tab1, tab2 = st.tabs(["🌐 Atlas Interface", "🔍 Interactive Query Builder"])
     
     with tab1:
-        st.markdown("Work in progress...")
         show_atlas_interface()
     
     with tab2:
@@ -27,11 +27,21 @@ def show_atlas_interface():
     """Muestra la interfaz de Atlas embebida"""
     st.subheader("Atlas Web Interface")
     st.markdown("Explore the full Atlas interface with all imported entities:")
+    st.markdown("""
+        Access credentials:
+        - **Username:** `admin`  
+        - **Password:** `admin`  
+    """)
     
-    # URL del proxy
-    proxy_url = "https://didactic-acorn-v74j65q4pqv3xx7p-8502.app.github.dev/"
-
-    # Crear el iframe usando el proxy
+    # Add authentication warning
+    st.warning("⚠️ If you see login issues, try opening Atlas in a new tab using the link below.")
+    
+    proxy_url = "http://localhost:8502"
+    
+    # Provide direct link option
+    st.markdown(f"**Direct Link:** [Open Atlas in New Tab]({proxy_url})")
+    
+    # Try embedding with additional parameters
     components.iframe(
         src=proxy_url,
         width=1400,
